@@ -42,6 +42,34 @@ ansible 2.9.5
    /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/ansible_test/*
 Proceed (y/n)? y
   Successfully uninstalled ansible-2.9.5
-  
+
 ```
-  
+## SSH connection to the remote hosts
+
+                        want to connect remotely to ssh server through passwordless login
+
+
+             using public private key pair
+
+Run commands to generate public key:                    Run commands:
+ls -al ~/.ssh/id_*.pub                                  sudo apt install openssh-server
+ssh|keygen -t rsa -b 4096                               Sudo systemctl status | grep 'ssh'
+ssh-copy-id remote_username@server_ip_address           sudo systemctl status ssh.service
+                                                        sudo ufw allow ssh
+                                                         +-----+
+              +-------+                                  |     |
+              |       |                                  |     |
+              |       |                                  |     |
+              |       +--------------------------------->+     |
+              |       |                                  |     |
+              |       |                                  |     |
+              |       |                                  |     |
+              |       |                                  |     |
+              |       |                                  |     |
+              +-------+                                  +-----+
+
+                                                         ssh Server - 192.168.0.18   [copy of public key of client]
+           client
+                                                         Virtual machine
+  private key
+  public key
