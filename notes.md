@@ -49,27 +49,24 @@ Proceed (y/n)? y
  ```
   passwordless login using public private key pair
 
+Run commands to generate public key:                Run commands to install ssh server:
+ls -al ~/.ssh/id_*.pub                              sudo apt install openssh-server
+ssh-keygen -t -rsa -b 4096                          Sudo systemctl status | grep 'ssh'
+                                                    sudo systemctl status ssh.service
+                                                    sudo ufw allow-ssh-+
+ +------+                                           +------+
+ |      |                                           |      |
+ |      |ssh-copy-id username@192.168.0.18                 |
+ |      +------------------------------------------>+      |
+ |      |         [copy of public key of client]    |      |
+ |      |                                           |      |
+ +------+                                           +------+
 
- Run commands to generate public key:
- ls -al ~/.ssh/id_*.pub
- ssh|keygen -t rsa -b 4096
- ssh|copy-id remote_username@ser^er_ip_address
- +------+                     +------+
- |      |                     |      |
- |      |                     |      |
- |      +-------------------->+      |
- |      |                     |      |
- |      |                     |      |
- +------+                     +------+
+ client                                              ssh Server - 192.168.0.18
+ private key
+ public key
 
- client              ssh Server - 192.168.0.18
-                  [copy of public key of client]
-private key
-public key         Run commands:      |
-                   sudo apt install openssh-server
-                   Sudo systemctl status | grep 'ssh'
-                   sudo systemctl status ssh.service
-                   sudo ufw allow-ssh-+
+
 ```
 
 
