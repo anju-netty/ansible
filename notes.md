@@ -46,30 +46,28 @@ Proceed (y/n)? y
 ```
 ## SSH connection to the remote hosts
 
-                        want to connect remotely to ssh server through passwordless login
+ ```
+  passwordless login using public private key pair
 
 
-             using public private key pair
+ Run commands to generate public key:
+ ls -al ~/.ssh/id_*.pub
+ ssh|keygen -t rsa -b 4096
+ ssh|copy-id remote_username@ser^er_ip_address
+ +------+                     +------+
+ |      |                     |      |
+ |      |                     |      |
+ |      +-------------------->+      |
+ |      |                     |      |
+ |      |                     |      |
+ +------+                     +------+
 
-Run commands to generate public key:                    Run commands:
-ls -al ~/.ssh/id_*.pub                                  sudo apt install openssh-server
-ssh|keygen -t rsa -b 4096                               Sudo systemctl status | grep 'ssh'
-ssh-copy-id remote_username@server_ip_address           sudo systemctl status ssh.service
-                                                        sudo ufw allow ssh
-                                                         +-----+
-              +-------+                                  |     |
-              |       |                                  |     |
-              |       |                                  |     |
-              |       +--------------------------------->+     |
-              |       |                                  |     |
-              |       |                                  |     |
-              |       |                                  |     |
-              |       |                                  |     |
-              |       |                                  |     |
-              +-------+                                  +-----+
-
-                                                         ssh Server - 192.168.0.18   [copy of public key of client]
-           client
-                                                         Virtual machine
-  private key
-  public key
+ client              ssh Server - 192.168.0.18
+                  [copy of public key of client]
+private key
+public key         Run commands:      |
+                   sudo apt install openssh-server
+                   Sudo systemctl status | grep 'ssh'
+                   sudo systemctl status ssh.service
+                   sudo ufw allow-ssh-+
+'''
