@@ -69,4 +69,37 @@ ssh-keygen -t -rsa -b 4096                          Sudo systemctl status | grep
 
 ```
 
+##Create host file
 
+mkdir /etc/ansible
+cd /etc/ansible
+sudo nano hosts
+[ctrl + X] Press 'Y'
+
+sudo nano ansible.cfg
+[default]
+remote_user = netty
+[ctrl + X] Press 'Y'
+
+```bash
+ansible all --list-hosts
+  hosts (1):
+    192.168.0.19
+
+ansible all --list-hosts
+  hosts (1):
+    192.168.0.19
+
+ansible all -m ping
+192.168.0.19 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+```
+- hosts: apache
+  tasks:
+    - name: install apache2
+      apt: name=apache2 update_cache=yes state=latest
